@@ -1,0 +1,11 @@
+CREATE SEQUENCE linklio.users_seq
+    INCREMENT 1
+    START 1000;
+
+CREATE TABLE linklio.users(
+    ID BIGINT PRIMARY KEY DEFAULT nextval('linklio.users_seq'),
+    USERNAME VARCHAR(50) NOT NULL UNIQUE,
+    EMAIL VARCHAR(254) NOT NULL UNIQUE,
+    password_hash VARCHAR(200) NOT NULL
+);
+

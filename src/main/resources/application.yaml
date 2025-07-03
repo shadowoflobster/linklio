@@ -1,0 +1,15 @@
+server:
+  port: 8000
+
+spring:
+  datasource:
+    url: ${LINKLIO_DB_URL}
+    username: ${LINKLIO_DB_USER}
+    password: ${LINKLIO_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yaml
+    default-schema: linklio
+
+jwt:
+  secret-key: ${LINKLIO_KEY}
