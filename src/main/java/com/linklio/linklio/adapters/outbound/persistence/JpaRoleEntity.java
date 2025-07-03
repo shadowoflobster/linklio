@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "roles", schema = "exam_zenith")
+@Table(name = "roles", schema = "linklio")
 @Getter
 @Setter
 public class JpaRoleEntity {

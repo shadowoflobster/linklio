@@ -1,3 +1,7 @@
+CREATE SEQUENCE linklio.subscriptions_seq
+    INCREMENT 1
+    START 1000;
+
 CREATE TABLE linklio.subscriptions (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
@@ -9,3 +13,4 @@ CREATE TABLE linklio.subscriptions (
     FOREIGN KEY (user_id) REFERENCES linklio.users(id),
     FOREIGN KEY (plan_id) REFERENCES linklio.plans(id)
 );
+
