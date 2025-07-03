@@ -1,0 +1,2 @@
+ALTER TABLE linklio.users
+ADD COLUMN verified BOOLEAN DEFAULT FALSE;

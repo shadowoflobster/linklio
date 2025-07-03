@@ -27,6 +27,9 @@ public class JpaUserEntity {
     @Column
     private String password_hash;
 
+    @Column
+    private boolean is_verified;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
