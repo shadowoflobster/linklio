@@ -1,13 +1,12 @@
 package com.linklio.linklio.adapters.outbound.persistence;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "plans", schema = "linklio")
@@ -28,5 +27,8 @@ public class JpaPlanEntity {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    private Set<JpaSubscriptionEntity> subscriptions = new HashSet<>();
 
 }

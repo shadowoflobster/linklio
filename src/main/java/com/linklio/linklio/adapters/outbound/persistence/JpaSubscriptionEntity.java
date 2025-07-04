@@ -32,5 +32,7 @@ public class JpaSubscriptionEntity {
     @JoinColumn(name="plan_id")
     private JpaPlanEntity plan;
 
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true;
 
 }

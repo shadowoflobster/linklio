@@ -18,14 +18,14 @@ public class JpaUserEntity {
     @GeneratedValue(generator = "user_seq_gen", strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String userName;
 
-    @Column
+    @Column(nullable = false)
     private  String email;
 
-    @Column
-    private String password_hash;
+    @Column(nullable = false)
+    private String passwordHash;
 
     @Column
     private boolean is_verified;
@@ -38,5 +38,8 @@ public class JpaUserEntity {
             inverseJoinColumns = @JoinColumn(name = ("role_id"))
     )
     private Set<JpaRoleEntity> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<JpaSubscriptionEntity> subscriptions = new HashSet<>();
 
 }
