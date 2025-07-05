@@ -1,4 +1,4 @@
-package com.linklio.linklio.adapters.outbound.persistence;
+package com.linklio.linklio.adapters.outbound.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

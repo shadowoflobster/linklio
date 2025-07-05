@@ -1,12 +1,10 @@
-package com.linklio.linklio.adapters.outbound.persistence;
+package com.linklio.linklio.adapters.outbound.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "subscriptions", schema = "linklio")
