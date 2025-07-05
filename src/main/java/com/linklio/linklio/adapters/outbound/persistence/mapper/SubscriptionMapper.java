@@ -27,4 +27,15 @@ public class SubscriptionMapper {
                 entity.isActive()
                 );
     }
+
+    public JpaSubscriptionEntity toEntity(Subscription subscription){
+        if(subscription==null) return null;
+        JpaSubscriptionEntity entity = new JpaSubscriptionEntity();
+        entity.setId(subscription.getId());
+        entity.setEndDate(subscription.getEndDate());
+        entity.setStartDate(subscription.getStartDate());
+        entity.setActive(subscription.isActive());
+
+        return entity;
+    }
 }

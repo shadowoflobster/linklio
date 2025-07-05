@@ -33,4 +33,17 @@ public class UserMapper {
                 shallowSubSet
         );
     }
+
+    public JpaUserEntity toEntity(User user){
+        if(user==null)return null;
+
+        JpaUserEntity entity = new JpaUserEntity();
+        entity.setId(user.getId());
+        entity.setEmail(user.getEmail());
+        entity.set_verified(user.isVerified());
+        entity.setPasswordHash(user.getPasswordHash());
+        entity.setUserName(user.getUserName());
+
+        return entity;
+    }
 }

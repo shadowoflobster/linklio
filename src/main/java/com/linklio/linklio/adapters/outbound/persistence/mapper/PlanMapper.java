@@ -27,4 +27,18 @@ public class PlanMapper {
                 shallowSubSet
                 );
     }
+
+    public JpaPlanEntity toEntity(Plan plan){
+        if(plan==null) return null;
+
+        JpaPlanEntity entity = new JpaPlanEntity();
+        entity.setId(plan.getId());
+        entity.setName(plan.getName());
+        entity.setPrice(plan.getPrice());
+        entity.setLinkLimit(plan.getLinkLimit());
+        entity.setDescription(plan.getDescription());
+
+        return entity;
+    }
+
 }

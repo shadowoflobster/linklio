@@ -10,4 +10,13 @@ public class RoleMapper {
         if(entity==null) return null;
         return new Role(entity.getId(), entity.getName());
     }
+
+    public JpaRoleEntity toEntity(Role role){
+        if(role == null) return null;
+
+        JpaRoleEntity entity= new JpaRoleEntity();
+        entity.setId(role.getId());
+        entity.setName(role.getName());
+        return entity;
+    }
 }
