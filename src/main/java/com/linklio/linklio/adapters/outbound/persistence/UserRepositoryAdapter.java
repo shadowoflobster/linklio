@@ -1,9 +1,8 @@
 package com.linklio.linklio.adapters.outbound.persistence;
 
 import com.linklio.linklio.adapters.outbound.persistence.mapper.UserMapper;
-import com.linklio.linklio.application.ports.out.LoadUserPort;
+import com.linklio.linklio.application.ports.out.userPorts.LoadUserPort;
 import com.linklio.linklio.domain.model.User;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
