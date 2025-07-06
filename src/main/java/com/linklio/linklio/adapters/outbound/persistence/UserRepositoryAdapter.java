@@ -20,6 +20,12 @@ public class UserRepositoryAdapter implements LoadUserPort {
                 .map(jpaEntity ->userMapper.toDomain(jpaEntity));
     }
 
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return jpaUserRepository.findByEmail(email)
+                .map(jpaEntity ->userMapper.toDomain(jpaEntity));
+    }
+
 
 
 }
