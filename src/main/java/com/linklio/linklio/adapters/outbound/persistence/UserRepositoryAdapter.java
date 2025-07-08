@@ -17,13 +17,13 @@ public class UserRepositoryAdapter implements LoadUserPort {
     @Override
     public Optional<User> findById(Long id) {
         return jpaUserRepository.findById(id)
-                .map(jpaEntity ->userMapper.toDomain(jpaEntity));
+                .map(userMapper::toDomain);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
         return jpaUserRepository.findByEmail(email)
-                .map(jpaEntity ->userMapper.toDomain(jpaEntity));
+                .map(userMapper::toDomain);
     }
 
 
