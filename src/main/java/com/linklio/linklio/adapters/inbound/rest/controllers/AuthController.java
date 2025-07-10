@@ -3,6 +3,7 @@ package com.linklio.linklio.adapters.inbound.rest.controllers;
 import com.linklio.linklio.adapters.inbound.rest.dto.LoginRequest;
 import com.linklio.linklio.adapters.inbound.rest.dto.RegisterRequest;
 import com.linklio.linklio.application.service.UserServices.CreateUserService;
+import com.linklio.linklio.application.service.UserServices.LoginResponse;
 import com.linklio.linklio.application.service.UserServices.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,9 @@ private final LoginService loginService;
 }
 
 @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) throws Exception {
-    loginService.login(request);
-    return ResponseEntity.ok("User Logged in successfully");
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) throws Exception {
+    LoginResponse response = loginService.login(request);
+    return ResponseEntity.ok(response);
 }
 
 }
