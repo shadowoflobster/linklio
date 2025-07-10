@@ -25,10 +25,10 @@ public class UserMapper {
 
         return new User(
                 entity.getId(),
-                entity.getUserName(),
+                entity.getUsername(),
                 entity.getEmail(),
                 entity.getPasswordHash(),
-                entity.is_verified(),
+                entity.isVerified(),
                 shallowRoleSet,
                 shallowSubSet
         );
@@ -40,9 +40,9 @@ public class UserMapper {
         JpaUserEntity entity = new JpaUserEntity();
         entity.setId(user.getId());
         entity.setEmail(user.getEmail());
-        entity.set_verified(user.isVerified());
+        entity.setVerified(user.isVerified());
         entity.setPasswordHash(user.getPasswordHash());
-        entity.setUserName(user.getUserName());
+        entity.setUsername(user.getUserName());
 
         return entity;
     }
