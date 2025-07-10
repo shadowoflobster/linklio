@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users", schema = "linklio")
-@SequenceGenerator(name = "user_seq_gen", sequenceName = "user_seq", allocationSize = 1)
+@SequenceGenerator(name = "user_seq_gen", sequenceName = "users_seq", allocationSize = 1)
 @Getter
 @Setter
 public class JpaUserEntity {
@@ -19,7 +19,7 @@ public class JpaUserEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String userName;
+    private String username;
 
     @Column(nullable = false)
     private  String email;
@@ -28,7 +28,7 @@ public class JpaUserEntity {
     private String passwordHash;
 
     @Column
-    private boolean is_verified;
+    private boolean verified;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
