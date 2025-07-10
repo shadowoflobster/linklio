@@ -12,6 +12,6 @@ public class JpaRoleEntity {
     @Id
     private Long id;
 
-    @Column
-    private String name;
+    @Column(name = "role_name")
+    private String roleName;
 }
