@@ -20,5 +20,4 @@ public class User {
     private boolean isVerified;
     private Set<Role> roles = new HashSet<>();
     private Set<Subscription> subscriptions = new HashSet<>();
-
 }
