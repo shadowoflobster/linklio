@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class RoleMapper {
     public Role toDomain(JpaRoleEntity entity){
         if(entity==null) return null;
-        return new Role(entity.getId(), entity.getName());
+        return new Role(entity.getId(), entity.getRoleName());
     }
 
     public JpaRoleEntity toEntity(Role role){
@@ -16,7 +16,7 @@ public class RoleMapper {
 
         JpaRoleEntity entity= new JpaRoleEntity();
         entity.setId(role.getId());
-        entity.setName(role.getName());
+        entity.setRoleName(role.getName());
         return entity;
     }
 }
