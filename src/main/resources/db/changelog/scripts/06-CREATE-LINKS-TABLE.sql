@@ -2,6 +2,12 @@ CREATE SEQUENCE linklio.links_seq
     INCREMENT 1
     START 1000;
 
+CREATE TABLE linklio.icons (
+    id VARCHAR(50) PRIMARY KEY,
+    icon_url TEXT NOT NULL,
+    description TEXT
+);
+
 CREATE TABLE linklio.links(
     ID BIGINT PRIMARY KEY DEFAULT nextval('linklio.links_seq'),
     link_text VARCHAR(255) NOT NULL,
@@ -22,7 +28,7 @@ CREATE TABLE linklio.links(
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP DEFAULT now(),
 
-    CONSTRAINT fk_links_user FOREIGN KEY (user_id) REFERENCES linklio.app_user(id),
+    CONSTRAINT fk_links_user FOREIGN KEY (user_id) REFERENCES linklio.users(id),
     CONSTRAINT fk_links_icon FOREIGN KEY (icon_id) REFERENCES linklio.icons(id)
 
 );
