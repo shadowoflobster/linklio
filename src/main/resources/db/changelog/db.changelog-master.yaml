@@ -9,4 +9,6 @@ databaseChangeLog:
       file:  db/changelog/scripts/04-CREATE-PLANS-TABLE.sql
   - include:
       file: db/changelog/scripts/05-CREATE-SUBSCRIPTIONS-TABLE.sql
+  - include:
+      file: db/changelog/scripts/06-CREATE-LINKS-TABLE.sql
 
