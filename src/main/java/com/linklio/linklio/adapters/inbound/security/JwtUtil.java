@@ -1,4 +1,4 @@
-package com.linklio.linklio.security;
+package com.linklio.linklio.adapters.inbound.security;
 
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
