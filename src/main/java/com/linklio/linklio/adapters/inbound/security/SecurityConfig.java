@@ -1,4 +1,4 @@
-package com.linklio.linklio.security;
+package com.linklio.linklio.adapters.inbound.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
