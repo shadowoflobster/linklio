@@ -1,4 +1,4 @@
-package com.linklio.linklio.security;
+package com.linklio.linklio.adapters.inbound.security;
 
 
 import com.nimbusds.jose.JWSVerifier;
@@ -8,22 +8,25 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
     @Value("${jwt.secret-key}")
     private String secretKey;
+    private final CustomUserDetailsService customUserDetailsService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
@@ -51,11 +54,12 @@ public class JwtFilter extends OncePerRequestFilter {
             }
             String username = signedJWT.getJWTClaimsSet().getSubject();
             List<String> roles = signedJWT.getJWTClaimsSet().getStringListClaim("roles");
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
+
 
             UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(username,null,
-                            roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                                    .collect(Collectors.toList()));
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
 
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }catch (Exception e){
