@@ -7,7 +7,6 @@ import com.linklio.linklio.domain.model.Link;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
