@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@SequenceGenerator(name = "link-seq-gen", sequenceName = "link-seq", allocationSize = 1)
+@SequenceGenerator(name = "link_seq_gen", sequenceName = "links_seq", allocationSize = 1)
 public class JpaLinkEntity {
     @Id
-    @GeneratedValue(generator = "link-seq-gen", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "link_seq_gen", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "link_text")
