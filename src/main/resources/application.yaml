@@ -11,5 +11,9 @@ spring:
     change-log: db/changelog/db.changelog-master.yaml
     default-schema: linklio
 
+logging:
+  level:
+    org.springframework.security: TRACE
+
 jwt:
   secret-key: ${LINKLIO_KEY}
