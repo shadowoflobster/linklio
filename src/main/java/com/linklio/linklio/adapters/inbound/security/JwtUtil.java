@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class JwtUtil {
@@ -30,6 +31,7 @@ public class JwtUtil {
                     .subject(email)
                     .issueTime(now)
                     .expirationTime(expiryDate)
+                    .claim("roles", List.of("ROLE_USER"))
                     .build();
 
             SignedJWT signedJWT = new SignedJWT(
