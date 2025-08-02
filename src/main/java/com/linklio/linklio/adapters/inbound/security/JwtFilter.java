@@ -63,12 +63,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
 
             UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(username, null, authorities);
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
 
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }catch (Exception e){
-            System.out.println("Error during jwt extraction");
+            System.out.println("Error during jwt extraction: " + e);
         }
         chain.doFilter(request, response);
     }
