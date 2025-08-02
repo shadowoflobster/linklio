@@ -1,5 +1,7 @@
 package com.linklio.linklio.adapters.inbound.security;
 
+import com.linklio.linklio.domain.model.Role;
+import com.linklio.linklio.domain.model.User;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {
@@ -20,18 +22,21 @@ public class JwtUtil {
 
     private final long expirationMillis = 3600_00;
 
-    public String generateToken(String email){
+    public String generateToken(User user){
         try {
-            JWSSigner signer = new MACSigner(secretKey);
+            JWSSigner signer = new MACSigner(secretKey.getBytes());
 
             Date now = new Date();
             Date expiryDate = new Date(now.getTime() + expirationMillis);
 
             JWTClaimsSet claims = new JWTClaimsSet.Builder()
-                    .subject(email)
+                    .subject(user.getEmail())
                     .issueTime(now)
                     .expirationTime(expiryDate)
-                    .claim("roles", List.of("ROLE_USER"))
+                    .claim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
+                    .claim("user_id", user.getId())
+                    .claim("user_name", user.getUserName())
+                    .claim("is_verified", user.isVerified())
                     .build();
 
             SignedJWT signedJWT = new SignedJWT(
@@ -40,6 +45,7 @@ public class JwtUtil {
             );
 
             signedJWT.sign(signer);
+
             return signedJWT.serialize();
         }catch (JOSEException e){
             throw new RuntimeException("Error creating JWT", e);
@@ -55,6 +61,7 @@ public class JwtUtil {
             throw new RuntimeException("Invalid Token", e);
         }
     }
+
 
     public Boolean validateToken(String token){
         try {
