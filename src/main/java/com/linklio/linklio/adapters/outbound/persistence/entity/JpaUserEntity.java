@@ -39,7 +39,7 @@ public class JpaUserEntity {
     )
     private Set<JpaRoleEntity> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<JpaSubscriptionEntity> subscriptions = new HashSet<>();
 
 }
