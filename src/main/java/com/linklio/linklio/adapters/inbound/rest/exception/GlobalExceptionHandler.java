@@ -1,9 +1,6 @@
 package com.linklio.linklio.adapters.inbound.rest.exception;
 
-import com.linklio.linklio.application.exceptions.IconNotFoundException;
-import com.linklio.linklio.application.exceptions.LinkNotFoundException;
-import com.linklio.linklio.application.exceptions.UnauthorizedAccessException;
-import com.linklio.linklio.application.exceptions.UserNotFoundException;
+import com.linklio.linklio.application.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +27,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnauthorizedAccessException.class)
     public ResponseEntity<?> handleUnauthorized(UnauthorizedAccessException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidEmailOrPassword.class)
+    public ResponseEntity<?> handleNotFound(InvalidEmailOrPassword ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }
 
