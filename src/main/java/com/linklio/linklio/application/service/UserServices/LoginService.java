@@ -4,15 +4,12 @@ import com.linklio.linklio.adapters.inbound.rest.dto.LoginRequest;
 import com.linklio.linklio.adapters.inbound.security.JwtUtil;
 import com.linklio.linklio.application.exceptions.InvalidEmailOrPassword;
 import com.linklio.linklio.application.ports.out.userPorts.LoadUserPort;
-import com.linklio.linklio.domain.model.Role;
 import com.linklio.linklio.domain.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
