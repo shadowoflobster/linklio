@@ -1,14 +1,19 @@
 package com.linklio.linklio.application.service.LinkServices;
 
 import com.linklio.linklio.adapters.inbound.rest.dto.LinkRequest;
+import com.linklio.linklio.adapters.inbound.rest.dto.LinkResponse;
 import com.linklio.linklio.adapters.outbound.persistence.JpaIconRepository;
+import com.linklio.linklio.adapters.outbound.persistence.JpaUserRepository;
 import com.linklio.linklio.adapters.outbound.persistence.mapper.IconMapper;
 import com.linklio.linklio.adapters.outbound.persistence.mapper.LinkMapper;
+import com.linklio.linklio.adapters.outbound.persistence.mapper.UserMapper;
+import com.linklio.linklio.application.exceptions.IconNotFoundException;
 import com.linklio.linklio.application.ports.out.linkPorts.SaveLinkPort;
 import com.linklio.linklio.domain.model.Icon;
 import com.linklio.linklio.domain.model.Link;
-import lombok.AllArgsConstructor;
+import com.linklio.linklio.domain.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,19 +23,28 @@ public class CreateLinkService {
     private final JpaIconRepository iconRepository;
     private final IconMapper iconMapper;
     private final LinkMapper linkMapper;
+    private final JpaUserRepository userRepository;
+    private final UserMapper userMapper;
 
 
-    public Link createLink(LinkRequest request){
+    public LinkResponse createLink(LinkRequest request, String email){
         Icon icon = null;
         if (request.getIconId() != null) {
             icon = iconRepository.findById(request.getIconId())
                     .map(iconMapper::toDomain)
-                    .orElseThrow(() -> new RuntimeException("Icon not found with id: " + request.getIconId()));
+                    .orElseThrow(() -> new IconNotFoundException(request.getIconId()));
         }
 
         Link link = linkMapper.toDomain(request,icon);
 
-        return saveLinkPort.save(link);
+        User user = userRepository.findByEmail(email)
+                .map(userMapper::toDomain)
+                .orElseThrow(() -> new UsernameNotFoundException(email));
+        link.setUser(user);
+
+        Link savedLink = saveLinkPort.save(link);
+
+        return linkMapper.toResponse(savedLink);
     }
 
 }
