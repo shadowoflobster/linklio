@@ -1,5 +1,6 @@
 package com.linklio.linklio.adapters.outbound.persistence.mapper;
 
+import com.linklio.linklio.adapters.outbound.persistence.entity.JpaRoleEntity;
 import com.linklio.linklio.adapters.outbound.persistence.entity.JpaUserEntity;
 import com.linklio.linklio.domain.model.Role;
 import com.linklio.linklio.domain.model.Subscription;
@@ -16,7 +17,7 @@ public class UserMapper {
         if(entity==null) return null;
 
         Set<Role>  shallowRoleSet = entity.getRoles().stream()
-                .map(subRole->new Role(subRole.getId(), null))
+                .map(subRole->new Role(subRole.getId(), subRole.getRoleName()))
                 .collect(Collectors.toSet());
 
         Set<Subscription> shallowSubSet = entity.getSubscriptions().stream()
@@ -43,6 +44,17 @@ public class UserMapper {
         entity.setVerified(user.isVerified());
         entity.setPasswordHash(user.getPasswordHash());
         entity.setUsername(user.getUserName());
+        if (user.getRoles() != null) {
+            Set<JpaRoleEntity> jpaRoles = user.getRoles().stream()
+                    .map(role -> {
+                        JpaRoleEntity jpaRole = new JpaRoleEntity();
+                        jpaRole.setId(role.getId()); // CRUCIAL: Use existing role ID
+                        jpaRole.setRoleName(role.getName()); // optional, used for debugging
+                        return jpaRole;
+                    }).collect(Collectors.toSet());
+
+            entity.setRoles(jpaRoles);
+        }
 
         return entity;
     }
