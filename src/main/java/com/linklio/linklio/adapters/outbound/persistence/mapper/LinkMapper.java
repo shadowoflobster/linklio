@@ -1,6 +1,7 @@
 package com.linklio.linklio.adapters.outbound.persistence.mapper;
 
 import com.linklio.linklio.adapters.inbound.rest.dto.LinkRequest;
+import com.linklio.linklio.adapters.inbound.rest.dto.LinkResponse;
 import com.linklio.linklio.adapters.outbound.persistence.entity.JpaIconEntity;
 import com.linklio.linklio.adapters.outbound.persistence.entity.JpaLinkEntity;
 import com.linklio.linklio.adapters.outbound.persistence.entity.JpaUserEntity;
@@ -90,5 +91,25 @@ public class LinkMapper {
         }
         return entity;
 
+    }
+
+    public LinkResponse toResponse(Link link) {
+        LinkResponse response = new LinkResponse();
+        response.setId(link.getId());
+        response.setLinkText(link.getLinkText());
+        response.setUrl(link.getUrl());
+        response.setBgColor(link.getBgColor());
+        response.setTextColor(link.getTextColor());
+        response.setBorderColor(link.getBorderColor());
+        response.setHoverBgColor(link.getHoverBgColor());
+        response.setHoverBorderColor(link.getHoverBorderColor());
+        response.setFontStyle(link.getFontStyle());
+        response.setVisible(link.isVisible());
+        response.setCreatedAt(link.getCreatedAt());
+        response.setUpdatedAt(link.getUpdatedAt());
+        response.setIcon(link.getIcon());
+        response.setOwnerEmail(link.getUser().getEmail());
+
+        return response;
     }
 }
