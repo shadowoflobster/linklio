@@ -2,11 +2,7 @@ package com.linklio.linklio.application.service.LinkServices;
 
 import com.linklio.linklio.adapters.inbound.rest.dto.LinkRequest;
 import com.linklio.linklio.adapters.inbound.rest.dto.LinkResponse;
-import com.linklio.linklio.adapters.outbound.persistence.JpaIconRepository;
-import com.linklio.linklio.adapters.outbound.persistence.JpaUserRepository;
-import com.linklio.linklio.adapters.outbound.persistence.mapper.IconMapper;
 import com.linklio.linklio.adapters.outbound.persistence.mapper.LinkMapper;
-import com.linklio.linklio.adapters.outbound.persistence.mapper.UserMapper;
 import com.linklio.linklio.application.exceptions.IconNotFoundException;
 import com.linklio.linklio.application.ports.out.linkPorts.LoadIconPort;
 import com.linklio.linklio.application.ports.out.linkPorts.SaveLinkPort;
