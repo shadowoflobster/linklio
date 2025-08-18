@@ -13,7 +13,8 @@ import java.util.Optional;
 public class UpdateLinkService {
     private final UpdateLinkPort updateLinkPort;
 
-    public Optional<LinkResponse> updateLink(Long id, LinkRequest linkRequest){
-        return updateLinkPort.updateById(id, linkRequest);
+    public LinkResponse updateLink(Long id, LinkRequest linkRequest){
+        return updateLinkPort.updateById(id, linkRequest)
+                .orElseThrow(() -> new LinkNotFoundException(id));
     }
 }
