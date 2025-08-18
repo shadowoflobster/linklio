@@ -112,4 +112,10 @@ public class LinkMapper {
 
         return response;
     }
+
+    public LinkResponse toResponse(JpaLinkEntity entity) {
+        Link domainLink = toDomain(entity);
+
+        return toResponse(domainLink);
+    }
 }
