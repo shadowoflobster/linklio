@@ -7,6 +7,7 @@ import com.linklio.linklio.application.service.LinkServices.CreateLinkService;
 import com.linklio.linklio.application.service.LinkServices.LoadLinkService;
 import com.linklio.linklio.application.service.LinkServices.UpdateLinkService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -26,11 +27,13 @@ public class LinkController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("isAuthenticated()")
     public LinkResponse createLink(@RequestBody LinkRequest linkRequest, Principal principal){
         return createLinkService.createLink(linkRequest, principal.getName());
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("isAuthenticated()")
     public LinkResponse updateLink(@PathVariable Long id, @RequestBody LinkRequest request, Principal principal){
         return updateLinkService.updateLink(id,request)
                 .orElseThrow(() -> new LinkNotFoundException(id));
