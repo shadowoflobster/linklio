@@ -83,11 +83,7 @@ public class LinkMapper {
         }
 
         if (link.getIcon() != null) {
-            JpaIconEntity iconEntity = new JpaIconEntity();
-            iconEntity.setId(link.getIcon().getId());
-            iconEntity.setIconUrl(link.getIcon().getIconUrl());
-            iconEntity.setDescription(link.getIcon().getDescription());
-            entity.setIcon(iconEntity);
+            entity.setIcon(new JpaIconEntity(link.getIcon().getId())); // reference only by ID
         }
         return entity;
 
