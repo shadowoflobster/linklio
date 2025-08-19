@@ -1,14 +1,8 @@
 package com.linklio.linklio.adapters.outbound.persistence;
 
-import com.linklio.linklio.adapters.inbound.rest.dto.LinkRequest;
 import com.linklio.linklio.adapters.inbound.rest.dto.LinkResponse;
-import com.linklio.linklio.adapters.outbound.persistence.entity.JpaIconEntity;
 import com.linklio.linklio.adapters.outbound.persistence.entity.JpaLinkEntity;
-import com.linklio.linklio.adapters.outbound.persistence.entity.JpaUserEntity;
 import com.linklio.linklio.adapters.outbound.persistence.mapper.LinkMapper;
-import com.linklio.linklio.application.exceptions.IconNotFoundException;
-import com.linklio.linklio.application.exceptions.LinkNotFoundException;
-import com.linklio.linklio.application.exceptions.UserNotFoundException;
 import com.linklio.linklio.application.ports.out.linkPorts.DeleteLinkPort;
 import com.linklio.linklio.application.ports.out.linkPorts.LoadLinkPort;
 import com.linklio.linklio.application.ports.out.linkPorts.SaveLinkPort;
@@ -17,15 +11,12 @@ import com.linklio.linklio.domain.model.Link;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class LinkRepositoryAdapter implements SaveLinkPort, LoadLinkPort, DeleteLinkPort, UpdateLinkPort {
     private final JpaLinkRepository jpaLinkRepository;
-    private final JpaUserRepository jpaUserRepository;
-    private final JpaIconRepository jpaIconRepository;
     private final LinkMapper linkMapper;
 
 
