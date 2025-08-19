@@ -50,29 +50,8 @@ public class LinkRepositoryAdapter implements SaveLinkPort, LoadLinkPort, Delete
     }
 
     @Override
-    public Optional<LinkResponse> updateById(Long id, LinkRequest linkRequest){
-        JpaLinkEntity linkEntity = jpaLinkRepository.findById(id)
-                .orElseThrow(() -> new LinkNotFoundException(id));
-        JpaUserEntity userEntity = jpaUserRepository.findById(linkRequest.getUserId())
-                        .orElseThrow(() -> new UserNotFoundException(linkRequest.getUserId()));
-        linkEntity.setUser(userEntity);
-        linkEntity.setLinkText(linkRequest.getLinkText());
-        linkEntity.setUrl(linkRequest.getUrl());
-        linkEntity.setBgColor(linkRequest.getBgColor());
-        linkEntity.setTextColor(linkRequest.getTextColor());
-        linkEntity.setBorderColor(linkRequest.getBorderColor());
-        linkEntity.setHoverBgColor(linkRequest.getHoverBgColor());
-        linkEntity.setHoverBorderColor(linkRequest.getHoverBorderColor());
-        linkEntity.setFontStyle(linkRequest.getFontStyle());
-        linkEntity.setVisible(linkRequest.isVisible());
-        linkEntity.setUpdatedAt(LocalDateTime.now());
-
-        if (linkRequest.getIconId() != null) {
-            JpaIconEntity iconEntity = jpaIconRepository.findById(linkRequest.getIconId())
-                    .orElseThrow(() -> new IconNotFoundException(linkRequest.getIconId()));
-            linkEntity.setIcon(iconEntity);
-        }
-
+    public Optional<LinkResponse> updateById(Link link){
+        JpaLinkEntity linkEntity = linkMapper.toEntity(link);
         JpaLinkEntity updated = jpaLinkRepository.save(linkEntity);
 
         return Optional.of(linkMapper.toResponse(updated));
