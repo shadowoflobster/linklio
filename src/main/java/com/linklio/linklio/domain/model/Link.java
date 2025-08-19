@@ -1,5 +1,6 @@
 package com.linklio.linklio.domain.model;
 
+import com.linklio.linklio.adapters.inbound.rest.dto.LinkRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,4 +27,18 @@ public class Link {
     private boolean isVisible;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public void updateFromRequest(LinkRequest linkRequest){
+        this.setLinkText(linkRequest.getLinkText());
+        this.setUrl(linkRequest.getUrl());
+        this.setBgColor(linkRequest.getBgColor());
+        this.setTextColor(linkRequest.getTextColor());
+        this.setBorderColor(linkRequest.getBorderColor());
+        this.setHoverBgColor(linkRequest.getHoverBgColor());
+        this.setHoverBorderColor(linkRequest.getHoverBorderColor());
+        this.setFontStyle(linkRequest.getFontStyle());
+        this.setVisible(linkRequest.isVisible());
+        this.setUpdatedAt(LocalDateTime.now());
+
+    }
     }
