@@ -24,4 +24,7 @@ public class JpaIconEntity {
 
     @Column
     private String description;
+
+    public JpaIconEntity(String id) {
+    }
 }
