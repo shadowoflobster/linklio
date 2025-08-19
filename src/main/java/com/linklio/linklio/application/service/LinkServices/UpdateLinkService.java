@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UpdateLinkService {
-    private final UpdateLinkPort updateLinkPort;
     private final LoadUserPort loadUserPort;
     private final LoadLinkPort loadLinkPort;
     private final LoadIconPort loadIconPort;
