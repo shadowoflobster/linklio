@@ -6,5 +6,5 @@ import com.linklio.linklio.adapters.inbound.rest.dto.LinkResponse;
 import java.util.Optional;
 
 public interface UpdateLinkPort {
-    Optional<LinkResponse> updateById(Long id, LinkRequest request);
+    Optional<LinkResponse> updateById(Link link);
 }
