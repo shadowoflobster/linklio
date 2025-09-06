@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 
@@ -26,6 +27,11 @@ public class LinkController {
     @GetMapping("/{id}")
     public LinkResponse getLink(@PathVariable Long id){
         return loadLinkService.loadLinkById(id);
+    }
+
+    @GetMapping("/user/{userId}/links")
+    public List<LinkResponse> getLinksByUserId(@PathVariable Long userId){
+        return loadLinkService.loadLinkByUserId(userId);
     }
 
     @PostMapping("/add")
@@ -73,6 +79,8 @@ public class LinkController {
                      ));
          }
     }
+
+
 
 
 }
