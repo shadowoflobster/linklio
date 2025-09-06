@@ -11,6 +11,7 @@ import com.linklio.linklio.domain.model.Link;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -32,6 +33,15 @@ public class LinkRepositoryAdapter implements SaveLinkPort, LoadLinkPort, Delete
     public Optional<Link> loadById(Long id){
         return jpaLinkRepository.findById(id)
                 .map(linkMapper::toDomain);
+    }
+
+    @Override
+    public List<Link> loadByUserId(Long userId){
+         List<JpaLinkEntity> entities = jpaLinkRepository.findByUserId(userId);
+
+         return entities.stream()
+                 .map(linkMapper::toDomain)
+                 .toList();
     }
 
 
