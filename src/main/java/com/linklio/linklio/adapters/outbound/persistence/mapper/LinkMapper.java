@@ -14,8 +14,15 @@ import org.springframework.stereotype.Component;
 public class LinkMapper {
     public Link toDomain(JpaLinkEntity entity){
        if (entity == null) return null;
+       Icon shallowIcon = null;
+        if (entity.getIcon() != null) {
+            shallowIcon = new Icon(
+                    entity.getIcon().getId(),
+                    entity.getIcon().getIconUrl(),
+                    entity.getIcon().getDescription()
+            );
+        }
 
-       Icon shallowIcon = new Icon(); //Build icon later!!!
 
        User shallowUser = new User();
        shallowUser.setId(entity.getUser().getId());
