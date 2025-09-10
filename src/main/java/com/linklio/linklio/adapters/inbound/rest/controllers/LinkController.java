@@ -3,6 +3,7 @@ package com.linklio.linklio.adapters.inbound.rest.controllers;
 import com.linklio.linklio.adapters.inbound.rest.dto.LinkRequest;
 import com.linklio.linklio.adapters.inbound.rest.dto.LinkResponse;
 import com.linklio.linklio.application.service.LinkServices.CreateLinkService;
+import com.linklio.linklio.application.service.LinkServices.DeleteLinkService;
 import com.linklio.linklio.application.service.LinkServices.LoadLinkService;
 import com.linklio.linklio.application.service.LinkServices.UpdateLinkService;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class LinkController {
     private CreateLinkService createLinkService;
     private LoadLinkService loadLinkService;
     private UpdateLinkService updateLinkService;
+    private DeleteLinkService deleteLinkService;
 
     @GetMapping("/{id}")
     public LinkResponse getLink(@PathVariable Long id){
@@ -55,6 +57,27 @@ public class LinkController {
                     ));
         }
         }
+
+        @DeleteMapping("/{id}")
+        @PreAuthorize("isAuthenticated()")
+        public ResponseEntity<?> deleteLink(@PathVariable Long id, Principal principal){
+        try{
+            deleteLinkService.deleteLink(id, principal.getName());
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(Map.of(
+                            "success", true,
+                            "message", "Link deleted successfully!"
+                    ));
+        }catch (Exception e){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of(
+                            "success",false,
+                            "message","Failed to delete link "+e.getMessage()
+                    ));
+        }
+    }
 
     @PutMapping("/update/{id}")
     @PreAuthorize("isAuthenticated()")
