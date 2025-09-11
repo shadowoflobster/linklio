@@ -1,8 +1,8 @@
-package com.linklio.linklio.application.service;
+package com.linklio.linklio.application.service.UserServices;
 
 import com.linklio.linklio.adapters.inbound.rest.dto.LoginRequest;
+import com.linklio.linklio.adapters.inbound.security.JwtUtil;
 import com.linklio.linklio.application.ports.out.userPorts.LoadUserPort;
-import com.linklio.linklio.application.service.UserServices.LoginService;
 import com.linklio.linklio.domain.model.Role;
 import com.linklio.linklio.domain.model.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,11 +12,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.lang.reflect.Field;
 import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -27,15 +27,15 @@ public class LoginServiceTest {
     private LoadUserPort loadUserPort = mock(LoadUserPort.class);
     @Mock
     private PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+    @Mock
+    private JwtUtil jwtUtil = mock(JwtUtil.class);
 
     @BeforeEach
     void setup() throws Exception{
         MockitoAnnotations.openMocks(this);
-        loginService = new LoginService(loadUserPort,passwordEncoder);
+        loginService = new LoginService(loadUserPort,passwordEncoder,jwtUtil);
+        when(jwtUtil.generateToken(any(User.class))).thenReturn("eyMockedToken123");
 
-        Field secretField = LoginService.class.getDeclaredField("secretkey");
-        secretField.setAccessible(true);
-        secretField.set(loginService,"my-256-bit-secret-my-256-bit-secret");
     }
 
     @Test
