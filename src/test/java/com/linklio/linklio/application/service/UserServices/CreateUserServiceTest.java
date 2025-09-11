@@ -1,9 +1,8 @@
-package com.linklio.linklio.application.service;
+package com.linklio.linklio.application.service.UserServices;
 
 import com.linklio.linklio.adapters.inbound.rest.dto.RegisterRequest;
 import com.linklio.linklio.application.ports.out.rolePorts.LoadRolePort;
 import com.linklio.linklio.application.ports.out.userPorts.SaveUserPort;
-import com.linklio.linklio.application.service.UserServices.CreateUserService;
 import com.linklio.linklio.domain.model.Role;
 import com.linklio.linklio.domain.model.User;
 import org.junit.jupiter.api.BeforeEach;
