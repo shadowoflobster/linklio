@@ -25,17 +25,16 @@ public class CreateLinkService {
 
 
     public LinkResponse createLink(LinkRequest request, String email){
-        Icon icon = null;
-        if (request.getIconId() != null) {
-            icon = loadIconPort.findById(request.getIconId())
-                    .orElseThrow(() -> new IconNotFoundException(request.getIconId()));
-        }
+        User user = loadUserPort.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email));
+
+        Icon icon = loadIconPort.findById(request.getIconId())
+                .orElseThrow(() -> new IconNotFoundException(request.getIconId()));
 
         Link link = linkMapper.toDomain(request,icon);
 
-        User user = loadUserPort.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(email));
         link.setUser(user);
+
 
         Link savedLink = saveLinkPort.save(link);
 

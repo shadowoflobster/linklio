@@ -18,12 +18,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LinkRepositoryAdapter implements SaveLinkPort, LoadLinkPort, DeleteLinkPort, UpdateLinkPort {
     private final JpaLinkRepository jpaLinkRepository;
+    private final JpaIconRepository jpaIconRepository;
+    private final JpaUserRepository jpaUserRepository;
     private final LinkMapper linkMapper;
 
 
     @Override
     public Link save(Link link){
         JpaLinkEntity linkEntity = linkMapper.toEntity(link);
+        if (link.getIcon() != null) {
+            linkEntity.setIcon(jpaIconRepository.getReferenceById(link.getIcon().getId())); // managed
+        }
+        linkEntity.setUser(jpaUserRepository.getReferenceById(link.getUser().getId()));
         JpaLinkEntity saved = jpaLinkRepository.save(linkEntity);
         return linkMapper.toDomain(saved);
 

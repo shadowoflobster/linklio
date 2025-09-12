@@ -46,13 +46,11 @@ public class LinkMapper {
 }
 
     public Link toDomain(LinkRequest request, Icon icon){
-        User user = new User();
-        user.setId(request.getUserId());
         return new Link(
                 null,
                 request.getLinkText(),
                 request.getUrl(),
-                user,
+                null,
                 request.getBgColor(),
                 request.getTextColor(),
                 request.getBorderColor(),
@@ -65,6 +63,7 @@ public class LinkMapper {
                 null
         );
     }
+
 
     public JpaLinkEntity toEntity(Link link) {
         if (link == null) return null;
