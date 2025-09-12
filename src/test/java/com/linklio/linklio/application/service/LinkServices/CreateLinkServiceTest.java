@@ -11,26 +11,28 @@ import com.linklio.linklio.domain.model.Link;
 import com.linklio.linklio.domain.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-
+@ExtendWith(MockitoExtension.class)
 public class CreateLinkServiceTest {
     @InjectMocks
     private CreateLinkService createLinkService;
     @Mock
-    private SaveLinkPort saveLinkPort = mock(SaveLinkPort.class);
+    private SaveLinkPort saveLinkPort;
     @Mock
-    private LoadIconPort loadIconPort = mock(LoadIconPort.class);
+    private LoadIconPort loadIconPort;
     @Mock
-    private LinkMapper linkMapper = mock(LinkMapper.class);
+    private LinkMapper linkMapper;
     @Mock
-    private LoadUserPort loadUserPort = mock(LoadUserPort.class);
+    private LoadUserPort loadUserPort;
 
 
     @BeforeEach
